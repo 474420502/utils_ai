@@ -1,4 +1,4 @@
-from string import punctuation
+ 
 
 special_char = ".．"
 seg_char = "。!;！；\r\t\n"
