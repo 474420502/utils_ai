@@ -17,11 +17,12 @@ class DataProcess:
             if pnum <= 0:
                 pnum = 1
             
-        self.pool = Pool(pnum)
+        self.pnum = pnum
         self.dofunc = dofunc
         self.splited_items_count = splited_items_count
 
     def processing(self, iterable, desc = "...",  limit = 1 << 32):
+        self.pool = Pool(self.pnum)
 
         result_items = []
 
@@ -51,6 +52,7 @@ class DataProcess:
                     result_items.append(item)
                 bar.update(len(items))
 
+        self.pool.close()
         return result_items
         
 
