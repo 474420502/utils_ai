@@ -1,3 +1,5 @@
+
+
 def get_approximation(h):
     """
     获取数值的所有约数
