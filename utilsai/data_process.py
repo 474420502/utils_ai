@@ -45,7 +45,7 @@ class DataProcess:
         total = 0
         datas = []
         cur = []
-        for line in tqdm(iterable):
+        for line in tqdm(iterable, desc="count the total of iterable"):
  
             total += 1
             cur.append(line)
