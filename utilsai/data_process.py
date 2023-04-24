@@ -7,10 +7,20 @@ from tqdm import tqdm
 
 
 class DataProcess:
+    
+  
+    def __init__(self,  dofunc, batch_size = 10000,  cpu_count = 0 ) -> None:
+        """
+            dofunc 
+            like do(batch): 
+            传入 splited_items 处理的batch数据
 
+            batch_size 
+            把数据拆分为多少batch处理, 默认10000
 
-    def __init__(self,  dofunc, splited_items_count = 10000,  cpu_count = 0 ) -> None:
-        tqdm()
+            cpu_count
+            使用并行的cpu处理的个数. 默认系统cpu_count - 1
+        """
         pnum = cpu_count
         if pnum <= 0:
             pnum = os.cpu_count() - 1
@@ -19,9 +29,15 @@ class DataProcess:
             
         self.pnum = pnum
         self.dofunc = dofunc
-        self.splited_items_count = splited_items_count
+        self.splited_items_count = batch_size
 
     def processing(self, iterable, desc = "...",  limit = 1 << 32):
+        """
+            iterable 迭代器 eg. open(filename)  
+            desc 加载进度条描述
+            limit 限制加载的个数
+        """
+
         self.pool = Pool(self.pnum)
 
         result_items = []
