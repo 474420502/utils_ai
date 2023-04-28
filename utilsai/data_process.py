@@ -45,7 +45,7 @@ class DataProcess:
         total = 0
         datas = []
         cur = []
-        for line in tqdm(iterable, desc="count the total of iterable"):
+        for line in tqdm(iterable, desc="load and count the total of iterable"):
  
             total += 1
             cur.append(line)
@@ -62,7 +62,7 @@ class DataProcess:
             cur = []
 
         
-        with tqdm(desc=f"{desc} load data", total=total) as bar:
+        with tqdm(desc=f"{desc} multi processing data", total=total) as bar:
             for items in self.pool.imap_unordered(self.dofunc, datas):
                 for item in items:
                     result_items.append(item)
